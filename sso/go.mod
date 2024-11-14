@@ -1,10 +1,13 @@
 module sso
 
-go 1.22
+go 1.22.0
+
+toolchain go1.22.2
 
 require (
 	github.com/fatih/color v1.18.0
 	github.com/ilyakaznacheev/cleanenv v1.5.0
+	golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f
 )
 
 require (
