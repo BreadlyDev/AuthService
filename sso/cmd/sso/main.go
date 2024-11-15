@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"sso/internal/app"
 	"sso/internal/config"
 	"sso/internal/lib/logger/handlers/slogpretty"
 )
@@ -31,7 +32,9 @@ func main() {
 
 	log.Warn("warn message")
 
-	
+	application := app.New(log, cfg.GRPC.port, cfg.StoragePath, cfg.TokenTTL)
+
+	application.GRPCSrv.MustRun()
 
 	fmt.Println(cfg)
 }
