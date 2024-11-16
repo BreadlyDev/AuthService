@@ -14,7 +14,7 @@ import (
 type App struct {
 	log        *slog.Logger
 	gRPCServer *grpc.Server
-	port       int
+	port       string
 }
 
 func New(
@@ -43,7 +43,7 @@ func (a *App) Run() error {
 
 	log := a.log.With(
 		slog.String("op", op),
-		slog.Int("port", a.port),
+		slog.String("port", a.port),
 	)
 
 	log.Info("starting gRPC server")
@@ -66,7 +66,7 @@ func (a *App) Stop() {
 	const op = "grpcapp.Stop"
 
 	a.log.With(slog.String("op", op)).
-		Info("stopping gRPC server", slog.Int("port", a.port))
+		Info("stopping gRPC server", slog.String("port", a.port))
 
 	a.gRPCServer.GracefulStop()
 }

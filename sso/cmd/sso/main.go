@@ -32,7 +32,7 @@ func main() {
 
 	log.Warn("warn message")
 
-	application := app.New(log, cfg.GRPC.port, cfg.StoragePath, cfg.TokenTTL)
+	application := app.New(log, cfg.GRPC.Port, cfg.StoragePath, cfg.TokenTTL)
 
 	application.GRPCSrv.MustRun()
 
