@@ -99,12 +99,14 @@ func (a *Auth) Login(
 		return "", fmt.Errorf("%s: %w", op, ErrInvalidCredentials)
 	}
 
-	_, err := a.appProvider.App(ctx, appID)
+	_, err = a.appProvider.App(ctx, appID)
 	if err != nil {
 		return "", fmt.Errorf("%s: %w", op, err)
 	}
 
 	log.Info("user logged in successfully")
+
+	return "", nil
 }
 
 // RegisterNewUser registers new user in the system and returns user ID.

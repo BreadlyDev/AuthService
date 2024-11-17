@@ -44,7 +44,6 @@ func main() {
 
 	application.GRPCSrv.Stop()
 	log.Info("application stopped", slog.String("signal", sign.String()))
-	// fmt.Println(cfg)
 }
 
 func setupLogger(env string) *slog.Logger {
@@ -52,9 +51,6 @@ func setupLogger(env string) *slog.Logger {
 
 	switch env {
 	case envLocal:
-		// log = slog.New(
-		// 	slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
-		// )
 		log = setupPrettySlog()
 	case envDev:
 		log = slog.New(
