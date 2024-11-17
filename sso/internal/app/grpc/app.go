@@ -48,7 +48,7 @@ func (a *App) Run() error {
 
 	log.Info("starting gRPC server")
 
-	l, err := net.Listen("tcp", fmt.Sprintf(":%d", a.port))
+	l, err := net.Listen("tcp", fmt.Sprintf("%s", a.port))
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, err)
 	}
