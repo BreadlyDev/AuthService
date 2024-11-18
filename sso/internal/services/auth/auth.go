@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log/slog"
 	"sso/internal/domain/models"
+	"sso/internal/lib/jwt"
 	"sso/internal/lib/logger/sl"
 	"sso/internal/storage"
 	"time"
@@ -99,14 +100,21 @@ func (a *Auth) Login(
 		return "", fmt.Errorf("%s: %w", op, ErrInvalidCredentials)
 	}
 
-	_, err = a.appProvider.App(ctx, appID)
+	app, err := a.appProvider.App(ctx, appID)
 	if err != nil {
 		return "", fmt.Errorf("%s: %w", op, err)
 	}
 
 	log.Info("user logged in successfully")
 
-	return "", nil
+	token, err := jwt.NewToken(user, app, a.tokenTTL)
+	if err != nil {
+		a.log.Error("failed to generate token", sl.Err(err))
+
+		return "", fmt.Errorf("%s: %w", op, err)
+	}
+
+	return token, nil
 }
 
 // RegisterNewUser registers new user in the system and returns user ID.
